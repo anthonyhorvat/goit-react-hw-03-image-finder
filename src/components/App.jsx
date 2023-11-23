@@ -15,6 +15,7 @@ export class App extends Component {
     page: 1,
     selectedImage: '',
     showModal: false,
+    loadMore: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -33,10 +34,12 @@ export class App extends Component {
       const data = await fetchPixabayImages(query, page);
 
       const { hits, totalHits } = data;
+
       this.setState(prevState => ({
-        pictures: page === 1 ? hits : [...prevState.pictures, ...hits],
+        pictures: [...prevState.pictures, ...hits],
         isLoading: false,
         showModal: false,
+        loadMore: hits.length > 0,
       }));
       const imagesLoaded = page * 12;
       if (imagesLoaded >= totalHits) {
@@ -70,11 +73,14 @@ export class App extends Component {
       <div className={css.Application}>
         <Searchbar onSubmit={this.handleSearch} />
         <ImageGallery pictures={pictures} openModal={this.openModal} />
+
         {isLoading && <Loader />}
         {showModal && (
           <Modal imageUrl={selectedImage} closeModal={this.closeModal} />
         )}
-        {loadMore && <Button onClick={this.loadMoreImages} />}
+        {pictures.length > 0 && loadMore && (
+          <Button onClick={this.loadMoreImages} />
+        )}
       </div>
     );
   }

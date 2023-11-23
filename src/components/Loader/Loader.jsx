@@ -1,30 +1,21 @@
 import React from 'react';
-import { Bars } from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 
 function Loader() {
   return (
-    <Bars
-      height="80"
-      width="80"
-      color="#4fa94d"
-      ariaLabel="bars-loading"
-      visible={true}
-    />
+    <div style={{ textAlign: 'center', margin: '0 auto' }}>
+      <ThreeDots
+        height="80"
+        width="80"
+        radius="9"
+        color="#4fa94d"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClassName=""
+        visible={true}
+      />
+    </div>
   );
 }
 
 export default Loader;
-/* 
-function Loader() {
-    return (
-      <div className={css.spinnerContainer}>
-        <div className={css.spinner}>
-          <div className={css.spinnerItem}></div>
-          <div className={css.spinnerItem}></div>
-          <div className={css.spinnerItem}></div>
-        </div>
-      </div>
-    );
-  }
-  
-  export default Loader; */
